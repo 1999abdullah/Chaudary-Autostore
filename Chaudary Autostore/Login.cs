@@ -7,7 +7,7 @@ namespace Chaudary_Autostore
     
     public class LoginPage : Common_method
     {
-
+        
 
         #region elements
 
@@ -19,14 +19,14 @@ namespace Chaudary_Autostore
         #endregion
 
         #region Constructor
-        public LoginPage(WebDriver driver1)
+        public LoginPage(IWebDriver driver1)
         {
             commonDriver =driver1;
         }
         #endregion
 
         #region operation-methods
-
+        
         void clickMyAccount()
         {
             click(myAccount);
@@ -43,6 +43,12 @@ namespace Chaudary_Autostore
         {
             click(loginButton);
         }
+
+        void close()
+        {
+            commonDriver.Navigate().Back();
+            commonDriver.Navigate().Refresh();
+        }
         #endregion
 
         #region login
@@ -51,9 +57,10 @@ namespace Chaudary_Autostore
         {
             clickMyAccount();
             inputEmail(email);
-          //  click(pass1);
+          //click(pass1);
             inputPassword(pass);
             clickLogin();
+            close();
         }
 
         #endregion

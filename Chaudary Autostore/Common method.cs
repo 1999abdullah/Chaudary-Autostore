@@ -1,4 +1,6 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Interactions;
 using System;
 using System.Collections.Generic;
@@ -10,8 +12,21 @@ namespace Chaudary_Autostore
 {
     public class Common_method
     {
-       public  WebDriver commonDriver;
+       public static  IWebDriver commonDriver;
         Actions action;
+        public static void driver(string driver)
+        {
+            if(driver == "Chrome" )
+            {
+                 commonDriver = new ChromeDriver();
+            }
+            else if (driver == "firefox")
+            {
+                commonDriver = new fire();
+            }
+        }
+
+
 
         #region frequent_mathods
 
@@ -28,8 +43,8 @@ namespace Chaudary_Autostore
         public void setText(By locate,string text)
         {
             IWebElement findedElement = findElement(locate);
-          //  findedElement.Clear();
-           // removeElemntText(findedElement);    
+            findedElement.Clear();
+            removeElemntText(findedElement);    
             findedElement.SendKeys(text+Keys.Tab);
         }
 
