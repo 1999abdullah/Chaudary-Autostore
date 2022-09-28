@@ -1,6 +1,11 @@
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using ExecutionScope = Microsoft.VisualStudio.TestTools.UnitTesting.ExecutionScope;
+
+[assembly: Parallelize(Workers = 1, Scope = ExecutionScope.MethodLevel)]
 
 [assembly: AssemblyTitle("Chaudary Autostore")]
 [assembly: AssemblyDescription("")]

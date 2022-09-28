@@ -15,21 +15,21 @@ namespace Chaudary_Autostore
 {
     public class Common_method
     {
-       public static  IWebDriver commonDriver;
+        public static IWebDriver commonDriver;
         Actions action;
 
         #region Webdriver
 
-        public static IWebDriver driver(string driver)
+        public static IWebDriver webDriver(string driver)
         {
-            if(driver == "Chrome" )
+            if (driver == "Chrome")
             {
-                 commonDriver = new ChromeDriver();
+                commonDriver = new ChromeDriver();
             }
             else if (driver == "firefox")
             {
                 commonDriver = new FirefoxDriver();
-                
+
             }
             else if (driver == "edge")
             {
@@ -45,26 +45,34 @@ namespace Chaudary_Autostore
         #region frequent_mathods
 
         // Find Element
-
+        
         public IWebElement findElement(By Locate)
         {
 
             return commonDriver.FindElement(Locate);
         }
 
-        // Send Text in input Feild
 
-        public void setText(By locate,string text)
+
+        // Driver method
+        public void Driver(string url)
+        {
+            commonDriver.Url = url;
+            //commonDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(60);
+        }
+
+        // Send Text in input Feild
+        public void setText(By locate, string text)
         {
             IWebElement findedElement = findElement(locate);
             findedElement.Clear();
-            removeElemntText(findedElement);    
-            findedElement.SendKeys(text+Keys.Tab);
+            removeElemntText(findedElement);
+            findedElement.SendKeys(text + Keys.Tab);
         }
 
         // Click on the element
 
-       public void click(By locator)
+        public void click(By locator)
         {
             action = new Actions(commonDriver);
             action.Click(findElement(locator)).Build().Perform();
@@ -72,11 +80,11 @@ namespace Chaudary_Autostore
 
         // Removing the Text in input feild
 
-       public void removeElemntText(IWebElement element)
+        public void removeElemntText(IWebElement element)
         {
             int a = element.Text.Length;
 
-            while(a> 0)
+            while (a > 0)
             {
                 element.SendKeys(Keys.Backspace);
             }
@@ -96,7 +104,32 @@ namespace Chaudary_Autostore
             //commonDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(60);
         }
 
-        
+        public string getElementText(By locator)
+        {
+            string text;
+            try
+            {
+                text = findElement(locator).Text;
+            }
+            catch
+            {
+                try
+                {
+                    text = findElement(locator).GetAttribute("Value");
+                }
+                catch
+                {
+                    text = findElement(locator).GetAttribute("innerHTML");
+
+                }
+            }
+            return text;
+
+        }
+
+
+       
+
         #endregion
 
 

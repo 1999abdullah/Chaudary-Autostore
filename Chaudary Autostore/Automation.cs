@@ -15,6 +15,8 @@ namespace Chaudary_Autostore
     {
       
 
+
+
         public TestContext instance;
         public TestContext TestContext
         {
@@ -27,43 +29,44 @@ namespace Chaudary_Autostore
 
         [TestMethod]
         [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML","Login_Data.XML","LoginWithValidCredentials",DataAccessMethod.Sequential)]
-        public void Login()
+        public void LoginValid()
         {
 
-           // string url = TestContext.DataRow["url"].ToString();
+            string url = TestContext.DataRow["url"].ToString();
 
             string user = TestContext.DataRow["email"].ToString();
 
             string pass = TestContext.DataRow["password"].ToString();
 
 
-            IWebDriver automationDriver = Common_method.driver("edge");
+            IWebDriver automationDriver = Common_method.webDriver("edge");
 
             LoginPage loginPage = new LoginPage(automationDriver);
-            loginPage.login(user, pass);
+            loginPage.login(url,user, pass);
 
 
         }
 
         [TestMethod]
-        [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", "Login_Data.XML", "LoginWithValidCredentials", DataAccessMethod.Sequential)]
-        public void Login()
+        [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML","Login_Data.XML","LoginWithInvalidCredentials",DataAccessMethod.Sequential)]
+        public void LoginInvalid()
         {
 
-            // string url = TestContext.DataRow["url"].ToString();
+            string url = TestContext.DataRow["url"].ToString();
 
             string user = TestContext.DataRow["email"].ToString();
 
             string pass = TestContext.DataRow["password"].ToString();
 
 
-            IWebDriver automationDriver = Common_method.driver("edge");
+            IWebDriver automationDriver = Common_method.webDriver("Chrome");
 
             LoginPage loginPage = new LoginPage(automationDriver);
-            loginPage.login(user, pass);
+            loginPage.login(url,user, pass);
 
 
         }
+
 
         [TestCleanup]
         public void testClose()
