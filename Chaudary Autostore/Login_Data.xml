@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Automation>
+
+	<Execution>
+
+		<LoginWithValidCredentials>
+
+			<email>abdullah@gmail.com</email>
+
+			<password>1999Phonex</password>
+
+		</LoginWithValidCredentials>
+
+		<LoginWithInvalidCredentials>
+
+			<email>Invalid</email>
+
+			<password>Invalid123</password>
+
+			</LoginWithInvalidCredentials>
+
+	</Execution>
+
+</Automation>

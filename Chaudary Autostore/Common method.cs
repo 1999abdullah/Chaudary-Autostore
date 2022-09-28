@@ -1,11 +1,14 @@
-﻿using OpenQA.Selenium;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Interactions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Chaudary_Autostore
@@ -14,7 +17,10 @@ namespace Chaudary_Autostore
     {
        public static  IWebDriver commonDriver;
         Actions action;
-        public static void driver(string driver)
+
+        #region Webdriver
+
+        public static IWebDriver driver(string driver)
         {
             if(driver == "Chrome" )
             {
@@ -22,11 +28,19 @@ namespace Chaudary_Autostore
             }
             else if (driver == "firefox")
             {
-                commonDriver = new fire();
+                commonDriver = new FirefoxDriver();
+                
             }
+            else if (driver == "edge")
+            {
+                commonDriver = new EdgeDriver();
+
+            }
+            commonDriver.Manage().Window.Maximize();
+            return commonDriver;
         }
 
-
+        #endregion
 
         #region frequent_mathods
 
@@ -69,7 +83,23 @@ namespace Chaudary_Autostore
         }
 
 
+        //Close Driver
+        public static void close()
+        {
+            commonDriver.Close();
+        }
+
+        //Sleep method
+        public void sleep()
+        {
+            Thread.Sleep(5000);
+            //commonDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(60);
+        }
+
+        
         #endregion
+
+
 
     }
 }
