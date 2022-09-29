@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Automation>
+
+	<Execution>
+
+		<LoginWithValidCredentials>
+
+			<url>https://chaudhryautostore.com/</url>
+			
+			<email>abdullah@gmail.com</email>
+
+			<password>1999Phonex</password>
+
+		</LoginWithValidCredentials>
+
+		<LoginWithInvalidCredentials>
+			
+			<url>https://chaudhryautostore.com/</url>
+			
+			<email>Invalid</email>
+
+			<password>Invalid123</password>
+
+			</LoginWithInvalidCredentials>
+
+	</Execution>
+
+</Automation>

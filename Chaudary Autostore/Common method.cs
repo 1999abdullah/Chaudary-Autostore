@@ -13,9 +13,12 @@ using System.Threading.Tasks;
 
 namespace Chaudary_Autostore
 {
+    // Common Method
+
     public class Common_method
     {
         public static IWebDriver commonDriver;
+       
         Actions action;
 
         #region Webdriver
@@ -104,9 +107,9 @@ namespace Chaudary_Autostore
         #endregion
 
         #region Sleep method
-        public void sleep()
+        public void sleep(int seconds)
         {
-            Thread.Sleep(5000);
+            Thread.Sleep(seconds);
             //commonDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(60);
         }
         #endregion
@@ -142,13 +145,13 @@ namespace Chaudary_Autostore
 
             try
             {
-                //bool resultText = Convert.ToBoolean(commonDriver.FindElement(locator)
-                //    .GetAttribute("type")
-                //    .Equals("text"));
+                bool resultText = Convert.ToBoolean(commonDriver.FindElement(locator)
+                    .GetAttribute("type")
+                    .Equals("text"));
                 bool resultpass = Convert.ToBoolean(commonDriver.FindElement(locator)
                     .GetAttribute("type")
-                    .Equals("Paassword"));
-                bool a =resultpass == true  /*|| resultpass == false*/ ? true : false;
+                    .Equals("password"));
+                bool a =resultpass == true || resultText == true ? true : false;
                 return a;
                 
             }
@@ -160,7 +163,40 @@ namespace Chaudary_Autostore
 
         #endregion
 
+        #region Get Element State
+        public string getElementState(By locator)
+        {
+            string state= findElement(locator).GetAttribute("Disabled");
+             return state == null ? "enabled" : state == "true" ? "disabled" : "Invalid";
+
+        }
         #endregion
+
+        #region Scroll To Element
+        public void scrollToElement(By locator)
+        {
+            IWebElement state = findElement(locator);
+            IJavaScriptExecutor commonExecuter = (IJavaScriptExecutor)commonDriver;
+            commonExecuter.ExecuteScript("arguments[0].scrollIntoView(true); ", state);
+
+
+        }
+        #endregion
+
+        #region Java Script Executer
+        public void (By locator)
+        {
+            IWebElement state = findElement(locator);
+            IJavaScriptExecutor commonExecuter = (IJavaScriptExecutor)commonDriver;
+            commonExecuter.ExecuteScript("arguments[0].scrollIntoView(true); ", state);
+
+
+        }
+        #endregion
+
+        #endregion
+
+
 
 
 
