@@ -42,26 +42,28 @@ namespace Chaudary_Autostore
 
         #endregion
 
-        #region frequent_mathods
+        #region General Method
 
-        // Find Element
-        
+
+        #region Find element
         public IWebElement findElement(By Locate)
         {
 
             return commonDriver.FindElement(Locate);
         }
 
+        #endregion
 
 
-        // Driver method
-        public void Driver(string url)
+        #region Url calling
+        public void driverUrl(string url)
         {
             commonDriver.Url = url;
             //commonDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(60);
         }
+        #endregion
 
-        // Send Text in input Feild
+        #region Send Text 
         public void setText(By locate, string text)
         {
             IWebElement findedElement = findElement(locate);
@@ -69,16 +71,18 @@ namespace Chaudary_Autostore
             removeElemntText(findedElement);
             findedElement.SendKeys(text + Keys.Tab);
         }
+        #endregion
 
-        // Click on the element
+        #region Click 
 
         public void click(By locator)
         {
             action = new Actions(commonDriver);
             action.Click(findElement(locator)).Build().Perform();
         }
+        #endregion
 
-        // Removing the Text in input feild
+        #region Removing the Text 
 
         public void removeElemntText(IWebElement element)
         {
@@ -89,21 +93,25 @@ namespace Chaudary_Autostore
                 element.SendKeys(Keys.Backspace);
             }
         }
+        #endregion
 
-
-        //Close Driver
+        #region Close Driver
         public static void close()
         {
             commonDriver.Close();
         }
 
-        //Sleep method
+        #endregion
+
+        #region Sleep method
         public void sleep()
         {
             Thread.Sleep(5000);
             //commonDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(60);
         }
+        #endregion
 
+        #region Get Element Text
         public string getElementText(By locator)
         {
             string text;
@@ -126,9 +134,31 @@ namespace Chaudary_Autostore
             return text;
 
         }
+        #endregion
 
+        #region Is Element Text Feild
+        public  bool isElementTextFeild(By locator)
+        {
 
-       
+            try
+            {
+                //bool resultText = Convert.ToBoolean(commonDriver.FindElement(locator)
+                //    .GetAttribute("type")
+                //    .Equals("text"));
+                bool resultpass = Convert.ToBoolean(commonDriver.FindElement(locator)
+                    .GetAttribute("type")
+                    .Equals("Paassword"));
+                bool a =resultpass == true  /*|| resultpass == false*/ ? true : false;
+                return a;
+                
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        #endregion
 
         #endregion
 

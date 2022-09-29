@@ -13,10 +13,10 @@ namespace Chaudary_Autostore
         #region elements
 
         By myAccount = By.XPath("//a[contains(text(),'My account')]");
-        By email = By.Id("login-customer[email]");
+        By emaill = By.Id("login-customer[email]");
         By pass1 = By.Id("login-customer[password]");
         By loginButton = By.XPath("//button[contains(text(),'Login')]");
-       
+
         #endregion
 
 
@@ -25,17 +25,17 @@ namespace Chaudary_Autostore
 
 
         #region Constructor
-        //public LoginPage(IWebDriver driver1)
-        //{
-        //    commonDriver =driver1;
-        //}
+        public LoginPage(IWebDriver driver1)
+        {
+            commonDriver = driver1;
+        }
         #endregion
 
         #region operation-methods
-        
+
         void landingPage(string u)
         {
-            Driver(u);
+            driverUrl(u);
         }
 
         void clickMyAccount()
@@ -44,7 +44,7 @@ namespace Chaudary_Autostore
         }
         void inputEmail(String emailInput)
         {
-            setText(email, emailInput);
+            setText(emaill, emailInput);
         }
         void inputPassword(String passInput)
         {
@@ -64,12 +64,15 @@ namespace Chaudary_Autostore
 
         #region login
 
-        public void login(string url1,string email,string pass)
+        public void login(string url,string email,string pass)
         {
-            landingPage(url1);
+            landingPage(url);
             string text = getElementText(myAccount);
             clickMyAccount();
+            
             inputEmail(email);
+            bool b = isElementTextFeild(pass1);
+            MessageBox.Show(b.ToString());
             inputPassword(pass);
             clickLogin();
             MessageBox.Show(text);

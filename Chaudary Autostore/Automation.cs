@@ -28,21 +28,21 @@ namespace Chaudary_Autostore
 
 
         [TestMethod]
-        [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML","Login_Data.XML","LoginWithValidCredentials",DataAccessMethod.Sequential)]
+       // [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML","Login_Data.XML","LoginWithValidCredentials",DataAccessMethod.Sequential)]
         public void LoginValid()
         {
 
-            string url = TestContext.DataRow["url"].ToString();
+            //string url = TestContext.DataRow["url"].ToString();
 
-            string user = TestContext.DataRow["email"].ToString();
+            //string user = TestContext.DataRow["email"].ToString();
 
-            string pass = TestContext.DataRow["password"].ToString();
+            //string pass = TestContext.DataRow["password"].ToString();
 
 
             IWebDriver automationDriver = Common_method.webDriver("edge");
 
             LoginPage loginPage = new LoginPage(automationDriver);
-            loginPage.login(url,user, pass);
+            loginPage.login("https://chaudhryautostore.com/","abdullah@gmail.com", "1999Phonex");
 
 
         }
