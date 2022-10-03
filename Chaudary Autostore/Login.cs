@@ -66,18 +66,18 @@ namespace Chaudary_Autostore
         public void login(string url, string email, string pass)
         {
             landingPage(url);
-            string text = getElementText(myAccount);
-            scrollToElement(buttonenable);
-            string state = getElementState(buttonenable);
-            MessageBox.Show(state);
-            scrollToElement(myAccount);
+           // string text = getElementText(myAccount);
+            //scrollToElement(buttonenable);
+            //string state = getElementState(buttonenable);
+            //MessageBox.Show(state);
+            //scrollToElement(myAccount);
             clickMyAccount();
 
             inputEmail(email);
            
             inputPassword(pass);
             clickLogin();
-            MessageBox.Show(text);
+           // MessageBox.Show(text);
             
             sleep(5000);
         }

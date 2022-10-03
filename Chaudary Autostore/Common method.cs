@@ -10,6 +10,8 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using Keys = OpenQA.Selenium.Keys;
 
 namespace Chaudary_Autostore
 {
@@ -69,10 +71,20 @@ namespace Chaudary_Autostore
         #region Send Text 
         public void setText(By locate, string text)
         {
-            IWebElement findedElement = findElement(locate);
-            findedElement.Clear();
-            removeElemntText(findedElement);
-            findedElement.SendKeys(text + Keys.Tab);
+
+            bool a= isElementTextFeild(locate);
+            if (a== true)
+            {
+                IWebElement findedElement = findElement(locate);
+                findedElement.Clear();
+                removeElemntText(findedElement);
+                findedElement.SendKeys(text + Keys.Tab);
+            }
+            else if (a== false)
+            {
+                MessageBox.Show("Element feild is not corerect");
+            }
+           
         }
         #endregion
 
@@ -84,6 +96,7 @@ namespace Chaudary_Autostore
             action.Click(findElement(locator)).Build().Perform();
         }
         #endregion
+
 
         #region Removing the Text 
 
@@ -98,6 +111,7 @@ namespace Chaudary_Autostore
         }
         #endregion
 
+
         #region Close Driver
         public static void close()
         {
@@ -106,6 +120,7 @@ namespace Chaudary_Autostore
 
         #endregion
 
+
         #region Sleep method
         public void sleep(int seconds)
         {
@@ -113,6 +128,7 @@ namespace Chaudary_Autostore
             //commonDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(60);
         }
         #endregion
+
 
         #region Get Element Text
         public string getElementText(By locator)
@@ -139,19 +155,24 @@ namespace Chaudary_Autostore
         }
         #endregion
 
+
         #region Is Element Text Feild
-        public  bool isElementTextFeild(By locator)
+        private  bool isElementTextFeild(By locator)
         {
+            IWebElement element = findElement(locator);
 
             try
             {
-                bool resultText = Convert.ToBoolean(commonDriver.FindElement(locator)
+                bool resultEmail = Convert.ToBoolean(element
+                    .GetAttribute("type")
+                    .Equals("email"));
+                bool resultText = Convert.ToBoolean(element
                     .GetAttribute("type")
                     .Equals("text"));
-                bool resultpass = Convert.ToBoolean(commonDriver.FindElement(locator)
+                bool resultpass = Convert.ToBoolean(element
                     .GetAttribute("type")
                     .Equals("password"));
-                bool a =resultpass == true || resultText == true ? true : false;
+                bool a =resultpass == true || resultText == true || resultEmail == true ? true : false;
                 return a;
                 
             }
@@ -172,6 +193,7 @@ namespace Chaudary_Autostore
         }
         #endregion
 
+
         #region Scroll To Element
         public void scrollToElement(By locator)
         {
@@ -183,15 +205,23 @@ namespace Chaudary_Autostore
         }
         #endregion
 
+
         #region Java Script Executer
-        public void (By locator)
+        public static string ExecuteJavaScriptCode(string javascriptCode)
         {
-            IWebElement state = findElement(locator);
-            IJavaScriptExecutor commonExecuter = (IJavaScriptExecutor)commonDriver;
-            commonExecuter.ExecuteScript("arguments[0].scrollIntoView(true); ", state);
+            string value = null;
+            try
+            {
+                IJavaScriptExecutor js = (IJavaScriptExecutor)commonDriver;
+                value = (string)js.ExecuteScript(javascriptCode);
+            }
+            catch (Exception)
+            {
 
-
+            }
+            return value;
         }
+
         #endregion
 
         #endregion
