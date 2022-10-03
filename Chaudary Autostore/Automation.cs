@@ -27,6 +27,13 @@ namespace Chaudary_Autostore
         }
 
 
+        [TestInitialize]
+        public void testInitalize()
+        {
+            Common_method.log.Info("Test case is run");
+        }
+
+
         [TestMethod]
         [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML","Login_Data.XML","LoginWithValidCredentials",DataAccessMethod.Sequential)]
         public void LoginValid()
@@ -37,12 +44,12 @@ namespace Chaudary_Autostore
             string user = TestContext.DataRow["email"].ToString();
 
             string pass = TestContext.DataRow["password"].ToString();
-
+            string[] values = new string[] { url, user, pass };
 
             IWebDriver automationDriver = Common_method.webDriver("chrome");
 
             LoginPage loginPage = new LoginPage(automationDriver);
-            loginPage.login(url,user, pass);
+            loginPage.login(values);
 
 
         }
@@ -57,12 +64,12 @@ namespace Chaudary_Autostore
             string user = TestContext.DataRow["email"].ToString();
 
             string pass = TestContext.DataRow["password"].ToString();
-
+            string[] values = new string[] { url, user, pass };
 
             IWebDriver automationDriver = Common_method.webDriver("Chrome");
 
             LoginPage loginPage = new LoginPage(automationDriver);
-            loginPage.login(url,user, pass);
+            loginPage.login(values);
 
 
         }
@@ -72,6 +79,7 @@ namespace Chaudary_Autostore
         public void testClose()
         {
             Common_method.close();
+            Common_method.log.Info("Test case is close");
         }
     }
 }

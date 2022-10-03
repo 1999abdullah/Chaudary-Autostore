@@ -33,26 +33,37 @@ namespace Chaudary_Autostore
 
         void landingPage(string u)
         {
+            log.Info("Open the url");
             driverUrl(u);
+            log.Info("Opend url is " + u);
         }
 
         void clickMyAccount()
         {
+            log.Info("Click the My Account button");
             click(myAccount);
+            log.Info("clicked button  is " + myAccount);
         }
         void inputEmail(String emailInput)
         {
             //bool b = isElementTextFeild(pass1);
             //MessageBox.Show(b.ToString());
+            log.Info("Enter the email address");
             setText(emaill, emailInput);
+            log.Info("The entered email  is " + emailInput);
+            
         }
         void inputPassword(String passInput)
         {
+            log.Info("Enter the password");
             setText(pass1, passInput);
+            log.Info("The entered email  is " + passInput);
         }
         void clickLogin()
         {
+            log.Info("Click the login button");
             click(loginButton);
+            log.Info("Clicked button is "+ loginButton);
         }
 
         void clickrecaptcha()
@@ -61,28 +72,28 @@ namespace Chaudary_Autostore
 
         }
 
-        //void close()
-        //{
-        //    commonDriver.Navigate().Back();
-        //    commonDriver.Navigate().Refresh();
-        //}
+        
         #endregion
 
         #region login
 
-        public void login(string url, string email, string pass)
+        public void login(string[] a)
         {
-            landingPage(url);
-           // string text = getElementText(myAccount);
+
+            
+            landingPage(a[0]);
+            
+            //string text = getElementText(myAccount);
             //scrollToElement(buttonenable);
             //string state = getElementState(buttonenable);
             //MessageBox.Show(state);
             //scrollToElement(myAccount);
+
             clickMyAccount();
 
-            inputEmail(email);
-           
-            inputPassword(pass);
+            inputEmail(a[1]);
+
+            inputPassword(a[2]);
             clickLogin();
             // MessageBox.Show(text);
             sleep(5000);

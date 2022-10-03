@@ -21,7 +21,9 @@ namespace Chaudary_Autostore
     public class Common_method
     {
         public static IWebDriver commonDriver;
-       
+        public static readonly log4net.ILog log =
+        log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         Actions action;
 
         #region Webdriver
@@ -95,10 +97,17 @@ namespace Chaudary_Autostore
 
         public void click(By locator)
         {
-             IWebElement element = WaitforElement(locator);
-          
-            action = new Actions(commonDriver);
-            action.Click(element).Build().Perform();
+            try
+            {
+                IWebElement element = WaitforElement(locator);
+
+                action = new Actions(commonDriver);
+                action.Click(element).Build().Perform();
+            }
+            catch
+            {
+                log.Error(locator + " element is not clicked");
+            }
         }
         #endregion
 
@@ -245,8 +254,8 @@ namespace Chaudary_Autostore
             }
             catch
             {
-                WebDriverWait wait = new WebDriverWait(commonDriver, TimeSpan.FromSeconds(6));
-                wait.Until(driver => IsPageReady() == true && IsElementVisible(by) == true /* && IsClickable(by) == true*/);
+                WebDriverWait wait = new WebDriverWait(commonDriver, TimeSpan.FromSeconds(60));
+                wait.Until(driver => IsPageReady() == true && IsElementVisible(by) == true  && IsClickable(by) == true);
                 element = findElement(by);
             }
             return element;
@@ -261,7 +270,7 @@ namespace Chaudary_Autostore
         {
             try
             {
-                
+                new WebDriverWait(commonDriver, TimeSpan.FromSeconds(10)).Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(by));
                 return true;
             }
             catch

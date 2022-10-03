@@ -4,7 +4,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using ExecutionScope = Microsoft.VisualStudio.TestTools.UnitTesting.ExecutionScope;
-
+[assembly: log4net.Config.XmlConfigurator(Watch = true)]
 [assembly: Parallelize(Workers = 1, Scope = ExecutionScope.MethodLevel)]
 
 [assembly: AssemblyTitle("Chaudary Autostore")]
