@@ -95,7 +95,8 @@ namespace Chaudary_Autostore
 
         public void click(By locator)
         {
-            IWebElement element = WaitforElement(locator);
+             IWebElement element = WaitforElement(locator);
+          
             action = new Actions(commonDriver);
             action.Click(element).Build().Perform();
         }
@@ -245,7 +246,7 @@ namespace Chaudary_Autostore
             catch
             {
                 WebDriverWait wait = new WebDriverWait(commonDriver, TimeSpan.FromSeconds(6));
-                wait.Until(driver => IsPageReady() == true && IsElementVisible(by) == true && IsClickable(by) == true);
+                wait.Until(driver => IsPageReady() == true && IsElementVisible(by) == true /* && IsClickable(by) == true*/);
                 element = findElement(by);
             }
             return element;
