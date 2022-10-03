@@ -17,6 +17,7 @@ namespace Chaudary_Autostore
         By pass1 = By.Id("login-customer[password]");
         By loginButton = By.XPath("//button[contains(text(),'Login')]");
         By buttonenable = By.XPath("//*[@id='shopify-section-template--15891515998462__1649981327094ed3c5']/section/div[2]/div/div/div/button[1]");
+        By recaptcha = By.Id("recaptcha-anchor");
         
         #endregion
 
@@ -54,6 +55,12 @@ namespace Chaudary_Autostore
             click(loginButton);
         }
 
+        void clickrecaptcha()
+        {
+            click(recaptcha);
+
+        }
+
         //void close()
         //{
         //    commonDriver.Navigate().Back();
@@ -77,9 +84,9 @@ namespace Chaudary_Autostore
            
             inputPassword(pass);
             clickLogin();
-           // MessageBox.Show(text);
-            
-            sleep(5000);
+            // MessageBox.Show(text);
+
+            clickrecaptcha();
         }
 
         #endregion

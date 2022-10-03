@@ -4,6 +4,7 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +28,7 @@ namespace Chaudary_Autostore
 
         public static IWebDriver webDriver(string driver)
         {
-            if (driver == "Chrome")
+            if (driver == "Chrome" || driver == "chrome")
             {
                 commonDriver = new ChromeDriver();
             }
@@ -68,6 +69,7 @@ namespace Chaudary_Autostore
         }
         #endregion
 
+
         #region Send Text 
         public void setText(By locate, string text)
         {
@@ -88,12 +90,14 @@ namespace Chaudary_Autostore
         }
         #endregion
 
+
         #region Click 
 
         public void click(By locator)
         {
+            IWebElement element = WaitforElement(locator);
             action = new Actions(commonDriver);
-            action.Click(findElement(locator)).Build().Perform();
+            action.Click(element).Build().Perform();
         }
         #endregion
 
@@ -206,7 +210,7 @@ namespace Chaudary_Autostore
         #endregion
 
 
-        #region Java Script Executer
+        #region Execute Java ScriptCode
         public static string ExecuteJavaScriptCode(string javascriptCode)
         {
             string value = null;
@@ -222,6 +226,79 @@ namespace Chaudary_Autostore
             return value;
         }
 
+        #endregion
+
+
+        #region Wait for  Element
+        private IWebElement WaitforElement(By by, int timeToReadyElement = 0)
+        {
+            IWebElement element = null;
+            try
+            {
+                if (timeToReadyElement != 0 && timeToReadyElement.ToString() != null)
+                {
+                    //PlaybackWait(timeToReadyElement * 1000);
+                   timeToReadyElement= timeToReadyElement * 1000;
+                }
+                element = findElement(by);
+            }
+            catch
+            {
+                WebDriverWait wait = new WebDriverWait(commonDriver, TimeSpan.FromSeconds(6));
+                wait.Until(driver => IsPageReady() == true && IsElementVisible(by) == true && IsClickable(by) == true);
+                element = findElement(by);
+            }
+            return element;
+        }
+
+        //private void PlaybackWait(int v)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        private bool IsClickable(By by)
+        {
+            try
+            {
+                
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+
+        }
+
+        private bool IsElementVisible(By by)
+        {
+
+            return (findElement(by).Displayed || findElement(by).Enabled) ? true : false;
+
+        }
+
+        private bool IsPageReady()
+        {
+
+            return  ExecuteJavaScriptCode("return document.readyState").Equals("complete");
+
+        }
+
+        #endregion
+
+        #region Element present
+        private bool IsElementPresent(By by)
+        {
+            try
+            {
+                findElement(by);
+                return true;
+            }
+            catch (NoSuchElementException)
+            {
+                return false;
+            }
+        }
         #endregion
 
         #endregion

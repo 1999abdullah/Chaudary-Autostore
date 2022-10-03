@@ -39,10 +39,10 @@ namespace Chaudary_Autostore
             string pass = TestContext.DataRow["password"].ToString();
 
 
-            IWebDriver automationDriver = Common_method.webDriver("edge");
+            IWebDriver automationDriver = Common_method.webDriver("chrome");
 
             LoginPage loginPage = new LoginPage(automationDriver);
-            loginPage.login("https://chaudhryautostore.com/","abdullah@gmail.com", "1999Phonex");
+            loginPage.login(url,user, pass);
 
 
         }
