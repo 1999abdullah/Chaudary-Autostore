@@ -96,8 +96,8 @@ namespace Chaudary_Autostore
             inputPassword(a[2]);
             clickLogin();
             // MessageBox.Show(text);
-            sleep(5000);
-            clickrecaptcha();
+            
+            //clickrecaptcha();
             sleep(5000);
         }
 
