@@ -7,11 +7,11 @@ using ExecutionScope = Microsoft.VisualStudio.TestTools.UnitTesting.ExecutionSco
 [assembly: log4net.Config.XmlConfigurator(Watch = true)]
 [assembly: Parallelize(Workers = 1, Scope = ExecutionScope.MethodLevel)]
 
-[assembly: AssemblyTitle("Chaudary Autostore")]
+[assembly: AssemblyTitle("Chaudary_Autostore")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Chaudary Autostore")]
+[assembly: AssemblyProduct("Chaudary_Autostore")]
 [assembly: AssemblyCopyright("Copyright ©  2022")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
