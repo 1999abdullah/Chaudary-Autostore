@@ -1,4 +1,7 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using AventStack.ExtentReports;
+using AventStack.ExtentReports.Reporter;
+using AventStack.ExtentReports.Reporter.Configuration;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
@@ -23,6 +26,24 @@ namespace Chaudary_Autostore
         public static IWebDriver commonDriver;
         public static readonly log4net.ILog log =
         log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        static string extentReportPath = "D://result" + DateTime.Now.ToString(" ddMMyyy");
+
+        public static AventStack.ExtentReports.ExtentReports extentReports = new AventStack.ExtentReports.ExtentReports();
+        public static ExtentTest exParentTest;
+        public static ExtentTest exChildTest;
+        public static string dirpath;
+       
+           
+           
+
+            public static ExtentHtmlReporter htmlReporter = new ExtentHtmlReporter(extentReportPath);
+
+          //  htmlReporter.Config.Theme = Theme.Standard;
+
+           
+        
+
+
 
         Actions action;
 

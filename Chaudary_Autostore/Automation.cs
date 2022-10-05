@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Net.WebRequestMethods;
+using AventStack.ExtentReports;
 
 namespace Chaudary_Autostore
 {
@@ -39,6 +40,9 @@ namespace Chaudary_Autostore
         [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML","Login_Data.XML","LoginWithValidCredentials",DataAccessMethod.Sequential)]
         public void LoginValid()
         {
+            Common_method.exParentTest = Common_method.extentReports.CreateTest(TestContext.TestName);
+            Common_method.exChildTest = Common_method.exParentTest.CreateNode("login valid");
+            Common_method.extentReports.AttachReporter(Common_method.htmlReporter);
 
             string url = TestContext.DataRow["url"].ToString();
 
@@ -51,7 +55,7 @@ namespace Chaudary_Autostore
 
             LoginPage loginPage = new LoginPage(automationDriver);
             loginPage.login(values);
-
+            Common_method.exChildTest.Log(Status.Pass,"test pass");
 
         }
 
