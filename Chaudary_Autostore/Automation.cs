@@ -36,7 +36,6 @@ namespace Chaudary_Autostore
 
 
         [TestMethod]
-        [TestCategory("login")]
         [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML","Login_Data.XML","LoginWithValidCredentials",DataAccessMethod.Sequential)]
         public void LoginValid()
         {
@@ -59,8 +58,7 @@ namespace Chaudary_Autostore
 
         }
 
-        [TestMethod]
-        [TestCategory("signup")]
+       // [TestMethod]
         [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML","Login_Data.XML","LoginWithInvalidCredentials",DataAccessMethod.Sequential)]
         public void LoginInvalid()
         {
