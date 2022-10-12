@@ -1,6 +1,8 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using AventStack.ExtentReports;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using System;
+using System.IO;
 using System.Windows.Forms;
 
 namespace Chaudary_Autostore
@@ -46,10 +48,10 @@ namespace Chaudary_Autostore
         }
         void inputEmail(String emailInput)
         {
-            //bool b = isElementTextFeild(pass1);
-            //MessageBox.Show(b.ToString());
+          
             log.Info("Enter the email address");
             setText(emaill, emailInput);
+            ExtentReport.exParentTest.Log(Status.Pass, emailInput);
             log.Info("The entered email  is " + emailInput);
             
         }

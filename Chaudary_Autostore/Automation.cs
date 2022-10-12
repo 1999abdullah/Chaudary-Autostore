@@ -12,26 +12,35 @@ using AventStack.ExtentReports;
 namespace Chaudary_Autostore
 {
     [TestClass]
-    public class Automation 
+    public class Automation : ExtentReport
     {
-      
+
 
 
 
         public TestContext instance;
-        public TestContext TestContext
+        public TestContext TestContext { get; set; }
+
+        [ClassInitialize]
+        public static void ClassInitialize(TestContext testContext)
         {
-
-            set { instance = value; }
-            get { return instance; }
-
+            LogReport("chaudary_auto_store_extent_report");
         }
+
+        [ClassCleanup]
+        public static void ClassCleanUp()
+        {
+            extentReports.Flush();
+        }
+
 
 
         [TestInitialize]
         public void testInitalize()
         {
             Common_method.log.Info("Test case is run");
+            //LogReport(TestContext.TestName);
+           // exParentTest = extentReports.CreateTest(TestContext.TestName);
         }
 
 
@@ -39,9 +48,9 @@ namespace Chaudary_Autostore
         [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML","Login_Data.XML","LoginWithValidCredentials",DataAccessMethod.Sequential)]
         public void LoginValid()
         {
-            Common_method.exParentTest = Common_method.extentReports.CreateTest(TestContext.TestName);
-            Common_method.exChildTest = Common_method.exParentTest.CreateNode("login valid");
-            Common_method.extentReports.AttachReporter(Common_method.htmlReporter);
+            exParentTest = extentReports.CreateTest("login valid");
+           // exChildTest = exParentTest.CreateNode("Login valid");
+
 
             string url = TestContext.DataRow["url"].ToString();
 
@@ -54,14 +63,18 @@ namespace Chaudary_Autostore
 
             LoginPage loginPage = new LoginPage(automationDriver);
             loginPage.login(values);
-            Common_method.exChildTest.Log(Status.Pass,"test pass");
+           
 
         }
 
-       // [TestMethod]
+        [TestMethod]
         [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML","Login_Data.XML","LoginWithInvalidCredentials",DataAccessMethod.Sequential)]
         public void LoginInvalid()
         {
+
+            exParentTest = extentReports.CreateTest("login invalid");
+            // exChildTest = exParentTest.CreateNode("Login invalid");
+
 
             string url = TestContext.DataRow["url"].ToString();
 
@@ -74,7 +87,7 @@ namespace Chaudary_Autostore
 
             LoginPage loginPage = new LoginPage(automationDriver);
             loginPage.login(values);
-
+            
 
         }
 
@@ -82,6 +95,7 @@ namespace Chaudary_Autostore
         [TestCleanup]
         public void testClose()
         {
+            exParentTest = null;
             Common_method.close();
             Common_method.log.Info("Test case is close");
         }
