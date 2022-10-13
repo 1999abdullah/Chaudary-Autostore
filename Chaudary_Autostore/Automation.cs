@@ -96,7 +96,7 @@ namespace Chaudary_Autostore
         public void testClose()
         {
             exParentTest = null;
-            Common_method.close();
+            //Common_method.close();
             Common_method.log.Info("Test case is close");
         }
     }

@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using System;
 using System.IO;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace Chaudary_Autostore
@@ -20,6 +21,9 @@ namespace Chaudary_Autostore
         By loginButton = By.XPath("//button[contains(text(),'Login')]");
         By buttonenable = By.XPath("//*[@id='shopify-section-template--15891515998462__1649981327094ed3c5']/section/div[2]/div/div/div/button[1]");
         By recaptcha = By.Id("g-recaptcha");
+        By recaptchaIfram = By.XPath("//iframe[@title='recaptcha challenge expires in two minutes']");
+        By iframeButton = By.XPath("//div[@tabindex='2']");
+        By submit = By.XPath("//input[@value='Submit']");
         
         #endregion
 
@@ -35,6 +39,7 @@ namespace Chaudary_Autostore
 
         void landingPage(string u)
         {
+            commonDriver.Navigate().GoToUrl(" chrome://extensions/");
             log.Info("Open the url");
             driverUrl(u);
             log.Info("Opend url is " + u);
@@ -71,10 +76,28 @@ namespace Chaudary_Autostore
         void clickrecaptcha()
         {
             click(recaptcha);
+            Thread.Sleep(5000);
+           
+        }
+
+        void clickSolverButton()
+        {
+
+            frameSwitch(recaptchaIfram);
+            click(iframeButton);
+            Thread.Sleep(3000);
+
+        }
+        void clickSubmitButton()
+        {
+
+           
+            click(submit);
+            
 
         }
 
-        
+
         #endregion
 
         #region login
@@ -84,23 +107,13 @@ namespace Chaudary_Autostore
 
             
             landingPage(a[0]);
-            
-            //string text = getElementText(myAccount);
-            //scrollToElement(buttonenable);
-            //string state = getElementState(buttonenable);
-            //MessageBox.Show(state);
-            //scrollToElement(myAccount);
-
             clickMyAccount();
-
             inputEmail(a[1]);
-
             inputPassword(a[2]);
             clickLogin();
-            // MessageBox.Show(text);
-            sleep(5000);
             clickrecaptcha();
-            sleep(5000);
+            clickSolverButton();
+            clickSubmitButton();
         }
 
         #endregion

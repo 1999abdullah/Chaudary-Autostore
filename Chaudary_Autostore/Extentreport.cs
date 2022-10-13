@@ -18,7 +18,7 @@ namespace Chaudary_Autostore
     public static void LogReport(string testcase)
     {
         extentReports = new ExtentReports();
-        dirpath = @"C:\Users\abdul\Source\Repos\1999abdullah\Chaudary-Autostore\Chaudary_Autostore\test_summery\Extent_report\" + '_' + testcase;
+        dirpath = @"C:\Users\abdul\Source\Repos\1999abdullah\Chaudary-Autostore\Chaudary_Autostore\test_summery\Extent_report\" + testcase;
 
         ExtentHtmlReporter htmlReporter = new ExtentHtmlReporter(dirpath);
 

@@ -6,8 +6,10 @@ using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
+using RazorEngine.Compilation.ImpromptuInterface.Optimization;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -36,7 +38,11 @@ namespace Chaudary_Autostore
         {
             if (driver == "Chrome" || driver == "chrome")
             {
-                commonDriver = new ChromeDriver();
+                ChromeOptions chromeOptions = new ChromeOptions();
+                chromeOptions.AddExtension("C:\\Users\\abdul\\Downloads\\extension_1_3_2_0.crx");
+
+                commonDriver = new ChromeDriver(chromeOptions);
+                
             }
             else if (driver == "firefox")
             {
@@ -66,6 +72,15 @@ namespace Chaudary_Autostore
 
         #endregion
 
+        #region Frame Switch
+        public void frameSwitch(By locator)
+        {
+            IWebElement element = WaitforElement(locator);
+            commonDriver.SwitchTo().Frame(element);
+           
+
+        }
+        #endregion
 
         #region Url calling
         public void driverUrl(string url)
